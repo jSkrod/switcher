@@ -1,0 +1,13 @@
+{
+    "name": "etermed/switcher",
+    "description": "Number to text translator.",
+    "type": "library",
+    "authors": [
+        {
+            "name": "jSkrod",
+            "email": "jedrzej.skrodzki@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
