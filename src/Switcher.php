@@ -1,26 +1,27 @@
 <?php
 namespace Etermed\Switcher;
 
-class Switcher{
-    public static $digits;
-  
-    public static function convert($value){
-        self::prepareInput($value);
-        
-        
-        
-    }
-    
-    private static function prepareInput($value){
-        $array = str_split($value);
-        
-        while(count($array) % 3){
-            array_unshift($array,"0");
-        }
-        
-        $array = array_reverse($array);
-        self::$digits = array_chunk($array,3);
-    }
+class Switcher {
+	private $digits_array;
 
+	public function convert( $number ) {
+		$words = '';
+		$this->prepareInput( $number );
+		foreach ( $this->digits_array as $key => $digits ) {
+			$group = new Group( $digits, $key );
+			$words = $group->convert() . ' ' . $words;
+		}
+	}
 
-};
+	private function prepareInput( $number ) {
+		$digits_array = str_split( $number );
+
+		// Fill array with 0's until we have 3 digits groups.
+		while ( count( $digits_array ) % 3 ) {
+			array_unshift( $digits_array, '0' );
+		}
+
+		$digits_array       = array_reverse( $digits_array );
+		$this->digits_array = array_chunk( $digits_array, 3 );
+	}
+}

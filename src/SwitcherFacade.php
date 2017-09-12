@@ -2,10 +2,10 @@
 namespace Etermed\Switcher;
 use Illuminate\Support\Facades\Facade;
 
-class MyPackageFacade extends Facade
+class SwitcherFacade extends Facade
 {
-    protected static function getFacadeAccessor()
-    {
-        return 'switcher';
-    }
+	protected static function getFacadeAccessor()
+	{
+		return 'switcher';
+	}
 }
