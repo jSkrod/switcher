@@ -2,12 +2,24 @@
 namespace Etermed\Switcher\Data;
 
 final class Words {
-	const MAGNITUDE = [
+	const MAGNITUDE_ONE = [
 		0 => 'PLN',
 		1 => 'tysiąc',
 		2 => 'milion',
+		3 => 'miliard',
 	];
-
+	const MAGNITUDE_MANY = [
+		0 => 'PLN',
+		1 => 'tysięcy',
+		2 => 'milionów',
+		3 => 'miliardów',
+	];
+	const MAGNITUDE_CORNER_CASE = [
+		0 => 'PLN',
+		1 => 'tysiące',
+		2 => 'miliony',
+		3 => 'miliary',
+	];
 	const NUMBERS_AS_WORDS = [
 		0 => [
 			0 => '',
@@ -77,7 +89,20 @@ final class Words {
 		return self::NUMBERS_AS_WORDS[$value][2];
 	}
 
-	public static function getMagnitude( $value ) {
+	public static function getMagnitude( $magnitude, $value = 0 ) {
+		switch ($value){
+			case 0:
+				return self::MAGNITUDE_ONE[$magnitude];
+				break;
+			case 2:
+			case 3:
+			case 4:
+				return self::MAGNITUDE_CORNER_CASE[$magnitude];
+				break;
+			default:
+				return self::MAGNITUDE_MANY[$magnitude];
+				break;
+		}
 		return self::MAGNITUDE[$value];
 	}
 

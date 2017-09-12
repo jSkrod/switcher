@@ -11,6 +11,7 @@ class Switcher {
 			$group = new Group( $digits, $key );
 			$words = $group->convert() . ' ' . $words;
 		}
+		return $words;
 	}
 
 	private function prepareInput( $number ) {

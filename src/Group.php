@@ -21,19 +21,23 @@ class Group {
 	}
 
 	public function convert() {
-		if ( $this->isOne() ) {
-			//dd($this->hundreds . " " . $this->tens . " " . $this->ones);
-			return Words::MAGNITUDE[$this->magnitude];
+		if ( $this->isEmpty() ) {
+			return;
+		} elseif ( $this->isOne() ) {
+			return Words::getMagnitude($this->magnitude,0);
 		} elseif ( $this->hasTeen() ) {
-			//dd($this->hundreds . " " . $this->tens . " " . $this->ones);
 			return Words::getHundreds( $this->hundreds ) . ' ' . Words::getTeen( $this->ones ) . ' ' . Words::getMagnitude( $this->magnitude );
 		}
 
-		return Words::getHundreds( $this->hundreds ) . ' ' . Words::getTens( $this->tens ) . ' ' . Words::getOnes( $this->ones ) . ' ' . Words::getMagnitude( $this->magnitude );
+		return Words::getHundreds( $this->hundreds ) . ' ' . Words::getTens( $this->tens ) . ' ' . Words::getOnes( $this->ones ) . ' ' . Words::getMagnitude( $this->magnitude, $this->ones );
 	}
 
 	private function hasTeen() {
 		return 1 == $this->tens;
+	}
+
+	private function isEmpty() {
+		return ! ( $this->ones || $this->tens || $this->hundreds );
 	}
 
 	private function isOne() {
