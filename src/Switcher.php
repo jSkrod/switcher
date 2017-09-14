@@ -5,21 +5,38 @@ class Switcher {
 	private $digits_array;
 
 	public function convert( $number ) {
-		$words = '';
-		// Break number into 'before decimal' and 'after decimal parts';
+		$words = "";
+		if($number < 0 ){
+			$words .= 'minus ';
+			$number = substr($number,1);
+		}
+		// Break number into 'before decimal' and 'after decimal' parts';
 		$number = explode( '.', $number );
 
 		$this->prepareInput( $number[0] );
+
+		$words .= $this->performConversion( $this->digits_array );
+
+		if ( isset( $number[1] ) ) {
+			return $this->appendRest( $words, $number[1] );
+		}
+
+		return $words;
+	}
+
+	private function appendRest( $words, $rest ) {
+		return $words . ' ' . $rest . '/100';
+	}
+
+	private function performConversion( $array ) {
+		$words = '';
+
 		foreach ( $this->digits_array as $key => $digits ) {
 			$group = new Group( $digits, $key );
 			$words = $group->convert() . ' ' . $words;
 		}
 
-		return $this->appendRest( $words, $number[1] );
-	}
-
-	private function appendRest( $words, $rest ) {
-		return $words . ' ' . $rest . '/100';
+		return $words;
 	}
 
 	private function prepareInput( $number ) {
