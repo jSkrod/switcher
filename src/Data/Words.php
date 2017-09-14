@@ -91,7 +91,7 @@ final class Words {
 
 	public static function getMagnitude( $magnitude, $value = 0 ) {
 		switch ($value){
-			case 0:
+			case -1:
 				return self::MAGNITUDE_ONE[$magnitude];
 				break;
 			case 2:

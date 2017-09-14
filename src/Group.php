@@ -24,7 +24,7 @@ class Group {
 		if ( $this->isEmpty() ) {
 			return;
 		} elseif ( $this->isOne() ) {
-			return Words::getMagnitude($this->magnitude,0);
+			return Words::getMagnitude($this->magnitude,-1);
 		} elseif ( $this->hasTeen() ) {
 			return Words::getHundreds( $this->hundreds ) . ' ' . Words::getTeen( $this->ones ) . ' ' . Words::getMagnitude( $this->magnitude );
 		}
